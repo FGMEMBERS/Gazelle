@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<fx>
+
+ 	<!-- outside -->
+		<engine>
+			<name>turbine-start-outside</name>
+			<mode>once</mode>
+			<path>Aircraft/Gazelle/Sounds/ec135_turbine_strt_out.wav</path>
+			<condition>
+				<equals>
+					<property>sim/model/gazelle/state</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/model/gazelle/outside_volume</property>
+			</volume>
+		</engine>
+
+		<engine>
+			<name>turbine-loop-outside</name>
+			<mode>looped</mode>
+			<path>Aircraft/Gazelle/Sounds/ec135_turbine_idle_out2.wav</path>
+			<condition>
+				<and>
+					<equals>
+						<property>sim/model/gazelle/state</property>
+						<value>2</value>
+					</equals>
+					<not>
+						<equals>
+							<property>sim/current-view/view-number</property>
+							<value>0</value>
+						</equals>
+					</not>
+				</and>
+			</condition>
+			<volume>
+				<property>sim/model/gazelle/outside_volume</property>
+			</volume>
+		</engine>
+
+		<engine>
+			<name>turbine-shutdown-outside</name>
+			<mode>once</mode>
+			<path>Aircraft/Gazelle/Sounds/ec135_shut_ec_out.wav</path>
+			<condition>
+				<equals>
+					<property>sim/model/gazelle/state</property>
+					<value>3</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/model/gazelle/outside_volume</property>
+			</volume>
+		</engine>
+
+
+		<!-- rotor -->
+
+		<rotor>
+			<name>rotor</name>
+			<mode>looped</mode>
+			<path>Aircraft/Gazelle/Sounds/eng_out.wav</path>
+			<condition>
+				<and>
+					<greater-than>
+						<property>rotors/main/rpm</property>
+						<value>50</value>
+					</greater-than>
+					<not>
+						<property>sim/crashed</property>
+					</not>
+				</and>
+			</condition>
+			<volume>
+				<property>rotors/main/rpm</property>
+				<factor>0.01</factor>
+				<max>0.25</max>
+			</volume>
+			<pitch>
+				<property>rotors/main/rpm</property>
+				<factor>0.003</factor>
+				<offset>-0.2</offset>
+				<max>1.5</max>
+			</pitch>
+		</rotor>
+
+		<rotor>
+			<name>stall</name>
+			<mode>looped</mode>
+			<path>Aircraft/Gazelle/Sounds/ec135_rotor_out.wav</path>
+			<condition>
+				<and>
+					<greater-than>
+						<property>rotors/main/rpm</property>
+						<value>50</value>
+					</greater-than>
+					<not>
+						<property>sim/crashed</property>
+					</not>
+				</and>
+			</condition>
+			<volume>
+				<property>rotors/main/stall-filtered</property>
+				<factor>150</factor>
+				<max>2.0</max>
+			</volume>
+			<pitch>
+				<property>rotors/main/rpm</property>
+				<factor>0.002262</factor>
+				<offset>0</offset>
+				<max>1.75</max>
+			</pitch>
+		</rotor>
+	</fx>
+</PropertyList>
